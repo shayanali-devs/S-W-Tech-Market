@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S&W Tech — Rebranding Tool</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--p:#2563EB;--pl:#3B82F6;--cyan:#06B6D4;--dark:#050A14;--surf:#0A1628;--surf2:#0F2040;--card:#111E35;--text:#E8F0FF;--muted:#5A7099;--bdr:rgba(37,99,235,.18);--green:#10B981;--red:#EF4444;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(37,99,235,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.025) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0;}
+.page{max-width:900px;margin:0 auto;padding:3rem 2rem;position:relative;z-index:1;}
+.header{text-align:center;margin-bottom:3.5rem;padding-bottom:2rem;border-bottom:1px solid var(--bdr);}
+.header-logo{display:inline-flex;align-items:center;gap:.7rem;margin-bottom:1.5rem;}
+.logo-mark{width:44px;height:44px;background:linear-gradient(135deg,var(--p),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff;font-family:'Space Mono',monospace;clip-path:polygon(0 0,85% 0,100% 15%,100% 100%,15% 100%,0 85%);}
+.logo-text{font-size:1.1rem;font-weight:700;}
+.logo-text span{color:var(--pl);}
+h1{font-family:'Space Mono',monospace;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:.02em;margin-bottom:.6rem;}
+h1 span{background:linear-gradient(135deg,var(--pl),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.header-sub{font-size:.88rem;color:var(--muted);line-height:1.7;max-width:520px;margin:0 auto;}
+.warning{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);padding:1rem 1.3rem;font-size:.8rem;color:rgba(245,158,11,.9);line-height:1.6;margin-bottom:2.5rem;display:flex;gap:.8rem;align-items:flex-start;}
+.warning-ico{font-size:1.1rem;flex-shrink:0;margin-top:.05rem;}
+.section{background:var(--surf);border:1px solid var(--bdr);margin-bottom:1.2rem;overflow:hidden;}
+.section-hd{padding:1.2rem 1.5rem;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;}
+.section-hd-l{display:flex;align-items:center;gap:.7rem;}
+.section-ico{font-size:1rem;}
+.section-title{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-family:'Space Mono',monospace;}
+.section-arrow{font-size:.7rem;color:var(--muted);transition:transform .3s;}
+.section-arrow.open{transform:rotate(90deg);}
+.section-body{padding:1.5rem;display:none;}
+.section-body.open{display:block;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.9rem;}
+.fg{margin-bottom:.85rem;}
+.fg label{font-size:.54rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.3rem;font-weight:700;}
+.fg input,.fg textarea,.fg select{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--text);padding:.7rem .88rem;font-family:'Space Grotesk',sans-serif;font-size:.82rem;outline:none;transition:border-color .2s;}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--pl);}
+.fg textarea{min-height:72px;resize:vertical;}
+.fg input[type="color"]{height:42px;padding:.3rem;cursor:pointer;}
+.fg .hint{font-size:.65rem;color:var(--muted);margin-top:.28rem;line-height:1.4;}
+.hours-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;align-items:center;margin-bottom:.5rem;}
+.hours-row .day-lbl{font-size:.76rem;color:var(--muted);}
+.slide-row{background:var(--card);border:1px solid var(--bdr);padding:1rem;margin-bottom:.8rem;}
+.slide-row-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;}
+.slide-num-lbl{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--pl);font-weight:700;font-family:'Space Mono',monospace;}
+.rm-btn{background:transparent;border:1px solid rgba(239,68,68,.25);color:var(--red);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .6rem;cursor:pointer;font-family:'Space Grotesk',sans-serif;}
+.rm-btn:hover{background:rgba(239,68,68,.08);}
+.add-slide-btn{width:100%;padding:.75rem;background:transparent;border:1px dashed var(--bdr);color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:.5rem;}
+.add-slide-btn:hover{border-color:var(--pl);color:var(--pl);}
+.actions{position:sticky;bottom:0;background:var(--dark);border-top:1px solid var(--bdr);padding:1.5rem 0;display:flex;gap:1rem;z-index:10;margin-top:2rem;}
+.btn-gen{flex:1;padding:1rem;background:var(--p);border:none;color:#fff;font-family:'Space Grotesk',sans-serif;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .3s;clip-path:polygon(0 0,96% 0,100% 25%,100% 100%,4% 100%,0 75%);}
+.btn-gen:hover{background:var(--pl);box-shadow:0 0 30px rgba(37,99,235,.35);}
+.btn-copy{padding:1rem 1.8rem;background:transparent;border:1px solid var(--bdr);color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .3s;}
+.btn-copy:hover{border-color:var(--pl);color:var(--pl);}
+.output-wrap{background:var(--card);border:1px solid var(--bdr);padding:1.5rem;margin-top:1.5rem;display:none;}
+.output-wrap.on{display:block;}
+.output-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+.output-title{font-family:'Space Mono',monospace;font-size:.8rem;color:var(--pl);letter-spacing:.08em;}
+.copy-btn{background:var(--p);border:none;color:#fff;padding:.45rem 1rem;font-family:'Space Grotesk',sans-serif;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-weight:700;}
+.copy-btn:hover{background:var(--pl);}
+pre{font-family:'Space Mono',monospace;font-size:.72rem;color:rgba(232,240,255,.8);line-height:1.65;white-space:pre-wrap;word-break:break-all;max-height:400px;overflow-y:auto;}
+pre::-webkit-scrollbar{width:3px;}
+pre::-webkit-scrollbar-thumb{background:var(--p);}
+.success-msg{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.22);color:var(--green);padding:.75rem 1rem;font-size:.78rem;margin-top:.9rem;display:none;}
+.success-msg.on{display:block;}
+.preview-bar{background:var(--surf2);border:1px solid var(--bdr);padding:.85rem 1.3rem;margin-top:1rem;display:flex;align-items:center;gap:1rem;}
+.preview-logo{font-weight:700;font-size:1.1rem;}
+.preview-colors{display:flex;gap:.5rem;}
+.preview-swatch{width:26px;height:26px;border-radius:50%;}
+@media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}.actions{flex-direction:column;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-logo">
+      <div class="logo-mark">S&W</div>
+      <div class="logo-text"><span>S&W</span> Tech Market</div>
+    </div>
+    <h1>// Rebranding <span>Tool</span></h1>
+    <p class="header-sub">Customize every detail of your tech shop — from name and colors to hero slides and Firebase config. Generate a new <code style="background:rgba(37,99,235,.1);padding:.15rem .4rem;font-size:.8em;color:var(--pl);">sw-config.js</code> file, copy it, and upload to your site.</p>
+  </div>
+
+  <div class="warning">
+    <div class="warning-ico">⚡</div>
+    <div>This tool generates a new <strong>sw-config.js</strong> file. After downloading/copying, upload it to your website to apply all changes. The file replaces your existing <code>sw-config.js</code> — no other files need to be changed.</div>
+  </div>
+
+  <!-- IDENTITY -->
+  <div class="section">
+    <div class="section-hd" onclick="toggleSection(this)">
+      <div class="section-hd-l"><span class="section-ico">🏷</span><div class="section-title">Brand Identity</div></div>
+      <span class="section-arrow open">▶</span>
+    </div>
+    <div class="section-body open">
+      <div class="grid2">
+        <div class="fg"><label>Store Name *</label><input id="r-name" value="S&W Tech Market" oninput="livePreview()"><div class="hint">Main brand name shown across the site</div></div>
+        <div class="fg"><label>Tagline *</label><input id="r-tagline" value="Your Tech, Delivered" oninput="livePreview()"></div>
+      </div>
+      <div class="fg"><label>Description</label><textarea id="r-desc">Pakistan's most trusted tech marketplace. Premium products, genuine warranty, lightning-fast delivery across the country.</textarea></div>
+      <div class="grid3">
+        <div class="fg"><label>Established Year</label><input id="r-established" value="2020"></div>
+        <div class="fg"><label>City</label><input id="r-city" value="Lahore, Pakistan"></div>
+        <div class="fg"><label>Slogan (Hero)</label><input id="r-slogan" value="Next-Gen Tech. Best Prices."></div>
+      </div>
+      <div class="fg"><label>Admin Password</label><input id="r-adminPass" value="swtech2024" type="text"><div class="hint">Password to access admin.html</div></div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section">
+    <div class="section-hd" onclick="toggleSection(this)">
+      <div class="section-hd-l"><span class="section-ico">📞</span><div class="section-title">Contact & Location</div></div>
+      <span class="section-arrow">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="fg"><label>WhatsApp Number (no + or spaces)</label><input id="r-whatsapp" value="923001234567" placeholder="923001234567"></div>
+        <div class="fg"><label>Display Phone</label><input id="r-phone" value="+92 300 123 4567"></div>
+      </div>
+      <div class="fg"><label>Full Address</label><input id="r-address" value="Main Market, Gulberg III, Lahore"></div>
+      <div class="grid2">
+        <div class="fg"><label>Google Maps URL</label><input id="r-maps" value="https://maps.google.com/?q=Gulberg+Lahore"></div>
+        <div class="fg"><label>Email</label><input id="r-email" value="info@swtech.pk"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOURS -->
+  <div class="section">
+    <div class="section-hd" onclick="toggleSection(this)">
+      <div class="section-hd-l"><span class="section-ico">🕐</span><div class="section-title">Business Hours</div></div>
+      <span class="section-arrow">▶</span>
+    </div>
+    <div class="section-body">
+      <div id="hoursRows">
+        <div class="hours-row"><div class="day-lbl">Mon – Sat</div><input value="10:00 AM – 9:00 PM" class="hour-val" style="background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--text);padding:.55rem .78rem;font-family:'Space Grotesk',sans-serif;font-size:.8rem;outline:none;width:100%;"></div>
+        <div class="hours-row"><div class="day-lbl">Sunday</div><input value="12:00 PM – 7:00 PM" class="hour-val" style="background:rgba(255,255,255,.04);border:1px solid var(--bdr);color:var(--text);padding:.55rem .78rem;font-family:'Space Grotesk',sans-serif;font-size:.8rem;outline:none;width:100%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOCIAL -->
+  <div class="section">
+    <div class="section-hd" onclick="toggleSection(this)">
+      <div class="section-hd-l"><span class="section-ico">📱</span><div class="section-title">Social Media</div></div>
+      <span class="section-arrow">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="grid2">
+        <div class="fg"><label>Facebook URL</label><input id="r-fb" value="https://facebook.com/" placeholder="https://facebook.com/yourbrand"></div>
+        <div class="fg"><label>Instagram URL</label><input id="r-ig" value="https://instagram.com/" placeholder="https://instagram.com/yourbrand"></div>
+        <div class="fg"><label>TikTok URL</label><input id="r-tt" value="https://tiktok.com/" placeholder="https://tiktok.com/@yourbrand"></div>
+        <div class="fg"><label>YouTube URL</label><input id="r-yt" value="https://youtube.com/" placeholder="https://youtube.com/@yourbrand"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLORS -->
+  <div class="section">
+    <div class="section-hd" onclick="toggleSection(this)">
+      <div class="section-hd-l"><span class="section-ico">🎨</span><div class="section-title">Colors & Theme</div></div>
+      <span class="section-arrow">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="grid3">
+        <div class="fg"><label>Primary Color</label><input type="color" id="c-primary" value="#2563EB" oninput="livePreview()"><div class="hint">Main blue — buttons, highlights</div></div>
+        <div class="fg"><label>Primary Light</label><input type="color" id="c-primaryLight" value="#3B82F6" oninput="livePreview()"></div>
+        <div class="fg"><label>Accent / Cyan</label><input type="color" id="c-cyan" value="#06B6D4" oninput="livePreview()"></div>
+        <div class="fg"><label>Background Dark</label><input type="color" id="c-dark" value="#050A14" oninput="livePreview()"></div>
+        <div class="fg"><label>Surface</label><input type="color" id="c-surface" value="#0A1628" oninput="livePreview()"></div>
+        <div class="fg"><label>Card Background</label><input type="color" id="c-card" value="#111E35" oninput="livePreview()"></div>
+        <div class="fg"><label>Text Color</label><input type="color" id="c-text" value="#E8F0FF" oninput="livePreview()"></div>
+        <div class="fg"><label>Muted Text</label><input type="color" id="c-muted" value="#5A7099" oninput="livePreview()"></div>
+        <div class="fg"><label>Accent (badges)</label><input type="color" id="c-accent" value="#F59E0B" oninput="livePreview()"></div>
+      </div>
+      <div class="preview-bar" id="colorPreview">
+        <div class="preview-logo" id="previewName">S&W Tech Market</div>
+        <div class="preview-colors">
+          <div class="preview-swatch" id="sw1" style="background:#2563EB;"></div>
+          <div class="preview-swatch" id="sw2" style="background:#3B82F6;"></div>
+          <div class="preview-swatch" id="sw3" style="background:#06B6D4;"></div>
+          <div class="preview-swatch" id="sw4" style="background:#F59E0B;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO SLIDES -->
+  <div class="section">
+    <div class="section-hd" onclick="toggleSection(this)">
+      <div class="section-hd-l"><span class="section-ico">🎬</span><div class="section-title">Hero Slides</div></div>
+      <span class="section-arrow">▶</span>
+    </div>
+    <div class="section-body">
+      <div id="slidesContainer"></div>
+      <button class="add-slide-btn" onclick="addSlide()">+ Add Another Slide</button>
+      <div class="fg" style="margin-top:1rem;"><div class="hint">💡 Images show as the slide background. Leave image empty to use the gradient. Recommended: 1920×1080px.</div></div>
+    </div>
+  </div>
+
+  <!-- LOYALTY -->
+  <div class="section">
+    <div class="section-hd" onclick="toggleSection(this)">
+      <div class="section-hd-l"><span class="section-ico">⭐</span><div class="section-title">Loyalty Program</div></div>
+      <span class="section-arrow">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="grid3">
+        <div class="fg"><label>Points Per Rs.</label><input type="number" id="r-loyDiv" value="500"><div class="hint">e.g. 500 = 1 point per Rs.500 spent</div></div>
+        <div class="fg"><label>Points to Redeem for Rs.1</label><input type="number" id="r-loyRedeem" value="10"><div class="hint">e.g. 10 points = Rs.1 discount</div></div>
+        <div class="fg"><label>imgbb API Key</label><input id="r-imgbb" value="ab7a51eaed988c67582fc8bcc877df5a"><div class="hint">For image upload. Get from imgbb.com/api</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIREBASE -->
+  <div class="section">
+    <div class="section-hd" onclick="toggleSection(this)">
+      <div class="section-hd-l"><span class="section-ico">🔥</span><div class="section-title">Firebase Configuration</div></div>
+      <span class="section-arrow">▶</span>
+    </div>
+    <div class="section-body">
+      <div class="warning" style="margin-bottom:1.2rem;">
+        <div class="warning-ico">⚠️</div>
+        <div>Create a new Firebase project for each new client. Enable <strong>Realtime Database</strong> and copy the config from Project Settings → Your Apps.</div>
+      </div>
+      <div class="grid2">
+        <div class="fg"><label>API Key</label><input id="fb-apiKey" value="AIzaSyBvG8fJCn8oi1spKFRkon-xff6kV_NvIsg"></div>
+        <div class="fg"><label>Auth Domain</label><input id="fb-authDomain" value="sw-tech-market.firebaseapp.com"></div>
+        <div class="fg"><label>Database URL *</label><input id="fb-dbUrl" value="https://sw-tech-market-default-rtdb.asia-southeast1.firebasedatabase.app"><div class="hint">Must end with .firebasedatabase.app</div></div>
+        <div class="fg"><label>Project ID</label><input id="fb-projectId" value="sw-tech-market"></div>
+        <div class="fg"><label>Storage Bucket</label><input id="fb-storageBucket" value="sw-tech-market.firebasestorage.app"></div>
+        <div class="fg"><label>Messaging Sender ID</label><input id="fb-messagingSenderId" value="1086791612893"></div>
+        <div class="fg"><label>App ID</label><input id="fb-appId" value="1:1086791612893:web:3eb9fe0fc332feaae9de34"></div>
+        <div class="fg"><label>Measurement ID (optional)</label><input id="fb-measurementId" placeholder="G-XXXXXXXXXX"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button class="btn-copy" onclick="resetDefaults()">↺ Reset Defaults</button>
+    <button class="btn-gen" onclick="generateConfig()">⚡ Generate sw-config.js</button>
+  </div>
+
+  <!-- OUTPUT -->
+  <div class="output-wrap" id="outputWrap">
+    <div class="output-hd">
+      <div class="output-title">// sw-config.js — Generated Output</div>
+      <button class="copy-btn" onclick="copyOutput()">📋 Copy All</button>
+    </div>
+    <pre id="outputCode"></pre>
+    <div class="success-msg" id="successMsg">✓ Copied to clipboard! Now paste this into your sw-config.js file and upload to GitHub.</div>
+    <div style="margin-top:1.2rem;padding:1rem;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.18);">
+      <div style="font-size:.7rem;font-weight:700;color:var(--green);margin-bottom:.5rem;letter-spacing:.1em;text-transform:uppercase;">📋 Next Steps</div>
+      <ol style="font-size:.78rem;color:var(--muted);padding-left:1.2rem;line-height:2;">
+        <li>Copy the generated code above</li>
+        <li>Open your GitHub repo → find <code style="color:var(--pl);">sw-config.js</code></li>
+        <li>Click the pencil ✏️ icon to edit</li>
+        <li>Select all → paste the new code</li>
+        <li>Click <strong>Commit changes</strong></li>
+        <li>Netlify will auto-deploy in ~30 seconds ⚡</li>
+      </ol>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── DEFAULT SLIDES ────────────────────────────────────────────
+const defaultSlides = [
+  { emoji:'💻', label:'Laptops',     headline:'Power Meets',   sub:'Portability',  bg:'linear-gradient(135deg,#0F2040 0%,#050A14 100%)', image:'', description:'' },
+  { emoji:'📱', label:'Smartphones', headline:'Stay',          sub:'Connected',    bg:'linear-gradient(135deg,#0F1A30 0%,#050A14 100%)', image:'', description:'' },
+  { emoji:'🎮', label:'Gaming Gear', headline:'Level Up',      sub:'Your Game',    bg:'linear-gradient(135deg,#1A0F2E 0%,#050A14 100%)', image:'', description:'' },
+  { emoji:'🎧', label:'Audio',       headline:'Hear Every',    sub:'Detail',       bg:'linear-gradient(135deg,#0F2040 0%,#0A1628 100%)', image:'', description:'' },
+  { emoji:'✨', label:'Aesthetics',  headline:'Build Your',    sub:'Dream Setup',  bg:'linear-gradient(135deg,#0A2020 0%,#050A14 100%)', image:'', description:'' },
+];
+
+let slides = JSON.parse(JSON.stringify(defaultSlides));
+
+function buildSlideUI() {
+  const c = document.getElementById('slidesContainer');
+  c.innerHTML = slides.map((s, i) => `
+    <div class="slide-row" id="sr-${i}">
+      <div class="slide-row-hd">
+        <div class="slide-num-lbl">Slide #${i+1}</div>
+        ${slides.length > 1 ? `<button class="rm-btn" onclick="removeSlide(${i})">Remove</button>` : ''}
+      </div>
+      <div class="grid3">
+        <div class="fg"><label>Emoji</label><input class="sl-emoji" value="${s.emoji||'⚡'}" maxlength="4"></div>
+        <div class="fg"><label>Category Label</label><input class="sl-label" value="${s.label||''}"></div>
+        <div class="fg"><label>Background Gradient</label><input class="sl-bg" value="${s.bg||'linear-gradient(135deg,#0F2040,#050A14)'}"></div>
+      </div>
+      <div class="grid2">
+        <div class="fg"><label>Headline (line 1)</label><input class="sl-h1" value="${s.headline||''}"></div>
+        <div class="fg"><label>Sub-headline (gradient line 2)</label><input class="sl-h2" value="${s.sub||''}"></div>
+      </div>
+      <div class="fg"><label>Image URL (optional — overrides gradient)</label><input class="sl-image" value="${s.image||''}" placeholder="https://..."></div>
+      <div class="fg"><label>Description (under headline)</label><input class="sl-desc" value="${s.description||''}" placeholder="Optional short description..."></div>
+    </div>`).join('');
+}
+
+function addSlide() {
+  slides.push({ emoji:'⚡', label:'New Slide', headline:'New', sub:'Slide', bg:'linear-gradient(135deg,#0F2040,#050A14)', image:'', description:'' });
+  buildSlideUI();
+  document.getElementById('sr-'+(slides.length-1)).scrollIntoView({behavior:'smooth'});
+}
+
+function removeSlide(i) {
+  slides.splice(i, 1);
+  buildSlideUI();
+}
+
+function collectSlides() {
+  const rows = document.querySelectorAll('.slide-row');
+  return Array.from(rows).map(row => ({
+    emoji:       row.querySelector('.sl-emoji')?.value?.trim() || '⚡',
+    label:       row.querySelector('.sl-label')?.value?.trim() || '',
+    headline:    row.querySelector('.sl-h1')?.value?.trim() || '',
+    sub:         row.querySelector('.sl-h2')?.value?.trim() || '',
+    bg:          row.querySelector('.sl-bg')?.value?.trim() || 'linear-gradient(135deg,#0F2040,#050A14)',
+    image:       row.querySelector('.sl-image')?.value?.trim() || '',
+    description: row.querySelector('.sl-desc')?.value?.trim() || '',
+  }));
+}
+
+// ── SECTION TOGGLE ────────────────────────────────────────────
+function toggleSection(hd) {
+  const body = hd.nextElementSibling;
+  const arrow = hd.querySelector('.section-arrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+// ── LIVE PREVIEW ─────────────────────────────────────────────
+function livePreview() {
+  document.getElementById('previewName').textContent = document.getElementById('r-name').value || 'Your Brand';
+  document.getElementById('sw1').style.background = document.getElementById('c-primary').value;
+  document.getElementById('sw2').style.background = document.getElementById('c-primaryLight').value;
+  document.getElementById('sw3').style.background = document.getElementById('c-cyan').value;
+  document.getElementById('sw4').style.background = document.getElementById('c-accent').value;
+}
+
+// ── GENERATE ─────────────────────────────────────────────────
+function generateConfig() {
+  const name        = document.getElementById('r-name').value.trim() || 'S&W Tech Market';
+  const tagline     = document.getElementById('r-tagline').value.trim() || 'Your Tech, Delivered';
+  const desc        = document.getElementById('r-desc').value.trim();
+  const established = document.getElementById('r-established').value.trim() || '2020';
+  const city        = document.getElementById('r-city').value.trim();
+  const slogan      = document.getElementById('r-slogan').value.trim();
+  const adminPass   = document.getElementById('r-adminPass').value.trim() || 'admin123';
+  const whatsapp    = document.getElementById('r-whatsapp').value.trim().replace(/\D/g,'');
+  const phone       = document.getElementById('r-phone').value.trim();
+  const address     = document.getElementById('r-address').value.trim();
+  const maps        = document.getElementById('r-maps').value.trim();
+  const email       = document.getElementById('r-email').value.trim();
+  const fb          = document.getElementById('r-fb').value.trim();
+  const ig          = document.getElementById('r-ig').value.trim();
+  const tt          = document.getElementById('r-tt').value.trim();
+  const yt          = document.getElementById('r-yt').value.trim();
+  const imgbb       = document.getElementById('r-imgbb').value.trim();
+  const loyDiv      = parseInt(document.getElementById('r-loyDiv').value) || 500;
+  const loyRedeem   = parseInt(document.getElementById('r-loyRedeem').value) || 10;
+
+  // Hours
+  const hourInputs = document.querySelectorAll('.hours-row');
+  const hours = {};
+  hourInputs.forEach(row => {
+    const day = row.querySelector('.day-lbl')?.textContent?.trim();
+    const val = row.querySelector('.hour-val')?.value?.trim();
+    if (day && val) hours[day] = val;
+  });
+
+  // Colors
+  const colors = {
+    primary:      document.getElementById('c-primary').value,
+    primaryLight: document.getElementById('c-primaryLight').value,
+    cyan:         document.getElementById('c-cyan').value,
+    dark:         document.getElementById('c-dark').value,
+    surface:      document.getElementById('c-surface').value,
+    surfaceAlt:   '#0F2040',
+    card:         document.getElementById('c-card').value,
+    text:         document.getElementById('c-text').value,
+    muted:        document.getElementById('c-muted').value,
+    accent:       document.getElementById('c-accent').value,
+  };
+
+  // Firebase
+  const firebase = {
+    apiKey:            document.getElementById('fb-apiKey').value.trim(),
+    authDomain:        document.getElementById('fb-authDomain').value.trim(),
+    databaseURL:       document.getElementById('fb-dbUrl').value.trim(),
+    projectId:         document.getElementById('fb-projectId').value.trim(),
+    storageBucket:     document.getElementById('fb-storageBucket').value.trim(),
+    messagingSenderId: document.getElementById('fb-messagingSenderId').value.trim(),
+    appId:             document.getElementById('fb-appId').value.trim(),
+    measurementId:     document.getElementById('fb-measurementId').value.trim(),
+  };
+
+  if (!firebase.databaseURL) { alert('⚠️ Firebase Database URL is required!'); return; }
+
+  // Slides
+  const slidesData = collectSlides();
+
+  const code = `// ============================================================
+//  S&W TECH MARKET — CONFIG
+//  Generated by Rebranding Tool on ${new Date().toLocaleDateString('en-PK')}
+//  Edit this file or use rebranding.html to regenerate.
+// ============================================================
+
+const SW_CONFIG = window.SW_CONFIG = {
+
+  // ── IDENTITY ──────────────────────────────────────────────
+  name:        "${name}",
+  tagline:     "${tagline}",
+  description: "${desc}",
+  established: "${established}",
+  city:        "${city}",
+  slogan:      "${slogan}",
+
+  // ── CONTACT ───────────────────────────────────────────────
+  whatsapp: "${whatsapp}",
+  phone:    "${phone}",
+  address:  "${address}",
+  mapsUrl:  "${maps}",
+  email:    "${email}",
+
+  // ── HOURS ─────────────────────────────────────────────────
+  hours: ${JSON.stringify(hours, null, 4).replace(/^/gm,'  ').trim()},
+
+  // ── SOCIAL ────────────────────────────────────────────────
+  social: {
+    facebook:  "${fb}",
+    instagram: "${ig}",
+    tiktok:    "${tt}",
+    youtube:   "${yt}",
+  },
+
+  // ── COLORS ────────────────────────────────────────────────
+  colors: {
+    primary:     "${colors.primary}",
+    primaryLight:"${colors.primaryLight}",
+    cyan:        "${colors.cyan}",
+    dark:        "${colors.dark}",
+    surface:     "${colors.surface}",
+    surfaceAlt:  "${colors.surfaceAlt}",
+    card:        "${colors.card}",
+    text:        "${colors.text}",
+    muted:       "${colors.muted}",
+    accent:      "${colors.accent}",
+  },
+
+  // ── HERO SLIDES ───────────────────────────────────────────
+  heroSlides: ${JSON.stringify(slidesData, null, 4).replace(/^/gm,'  ').trim()},
+
+  // ── CATEGORIES ────────────────────────────────────────────
+  categories: [
+    { name:"Laptops",       emoji:"💻", desc:"Business, Gaming & Ultrabooks" },
+    { name:"Smartphones",   emoji:"📱", desc:"Android, iOS & Accessories" },
+    { name:"Gaming",        emoji:"🎮", desc:"Controllers, Headsets & More" },
+    { name:"Audio",         emoji:"🎧", desc:"Earbuds, Speakers & Headphones" },
+    { name:"Smart Watches", emoji:"⌚", desc:"Fitness & Smartwatches" },
+    { name:"Monitors",      emoji:"🖥",  desc:"4K, Gaming & Professional" },
+    { name:"Cameras",       emoji:"📷", desc:"DSLRs, Action & Security Cams" },
+    { name:"Aesthetics",    emoji:"✨", desc:"RGB, Desk Setup & Décor" },
+    { name:"Accessories",   emoji:"🔌", desc:"Cables, Bags, Hubs & More" },
+    { name:"Networking",    emoji:"📡", desc:"Routers, Switches & Modems" },
+  ],
+
+  // ── LOYALTY ───────────────────────────────────────────────
+  loyaltyDivisor: ${loyDiv},
+  loyaltyPerUnit: 1,
+  loyaltyRedeem:  ${loyRedeem},
+
+  // ── ADMIN ─────────────────────────────────────────────────
+  adminPassword: "${adminPass}",
+  imgbbKey:      "${imgbb}",
+
+  // ── FIREBASE ──────────────────────────────────────────────
+  firebase: {
+    apiKey:            "${firebase.apiKey}",
+    authDomain:        "${firebase.authDomain}",
+    databaseURL:       "${firebase.databaseURL}",
+    projectId:         "${firebase.projectId}",
+    storageBucket:     "${firebase.storageBucket}",
+    messagingSenderId: "${firebase.messagingSenderId}",
+    appId:             "${firebase.appId}",${firebase.measurementId ? `\n    measurementId:     "${firebase.measurementId}",` : ''}
+  },
+
+  // ── SEASONAL THEMES ───────────────────────────────────────
+  themes: {
+    "":             { name:"Default",        emoji:"💻", primary:"${colors.primary}", accent:"${colors.cyan}",   banner:"" },
+    "sale":         { name:"Mega Sale",      emoji:"🔥", primary:"#DC2626",           accent:"#FCD34D",           banner:"🔥 MEGA SALE — Up to 50% off selected items this week!" },
+    "eid":          { name:"Eid Special",    emoji:"🌙", primary:"#059669",           accent:"#FCD34D",           banner:"🌙 Eid Mubarak! Special tech deals — limited time only" },
+    "back2school":  { name:"Back to School", emoji:"🎒", primary:"#7C3AED",           accent:"#A78BFA",           banner:"🎒 Back to School Sale — Laptops & accessories discounted!" },
+    "independence": { name:"Independence Day",emoji:"🇵🇰",primary:"#065F46",           accent:"#FFFFFF",           banner:"🇵🇰 Happy Independence Day! Special 14 August tech offers" },
+    "winter":       { name:"Winter Sale",    emoji:"❄️",  primary:"#1E3A5F",           accent:"#93C5FD",           banner:"❄️ Winter Sale is here — grab your tech before stock runs out!" },
+  },
+
+  // ── SURVEY QUESTIONS ──────────────────────────────────────
+  survey: {
+    enabled: true,
+    questions: [
+      { id:"city",     type:"select",   label:"Which city are you from?",        options:["Lahore","Karachi","Islamabad","Rawalpindi","Faisalabad","Multan","Peshawar","Other"] },
+      { id:"source",   type:"select",   label:"How did you hear about us?",      options:["Instagram","Facebook","TikTok","Google","Friend / Family","YouTube","Other"] },
+      { id:"device",   type:"select",   label:"What device are you ordering on?",options:["Smartphone","Laptop","PC","Tablet"] },
+      { id:"rating",   type:"stars",    label:"How was your ordering experience?" },
+      { id:"feedback", type:"textarea", label:"Any suggestions for us? (optional)" },
+    ]
+  }
+};
+
+// ── AUTO APPLY CSS VARS ───────────────────────────────────────
+(function(){
+  var c = SW_CONFIG.colors;
+  var r = document.documentElement.style;
+  r.setProperty('--primary',     c.primary);
+  r.setProperty('--primary-l',   c.primaryLight);
+  r.setProperty('--cyan',        c.cyan);
+  r.setProperty('--dark',        c.dark);
+  r.setProperty('--surface',     c.surface);
+  r.setProperty('--surface-alt', c.surfaceAlt);
+  r.setProperty('--card',        c.card);
+  r.setProperty('--text',        c.text);
+  r.setProperty('--muted',       c.muted);
+  r.setProperty('--accent',      c.accent);
+})();
+`;
+
+  document.getElementById('outputCode').textContent = code;
+  document.getElementById('outputWrap').classList.add('on');
+  document.getElementById('outputWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function copyOutput() {
+  const code = document.getElementById('outputCode').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    const msg = document.getElementById('successMsg');
+    msg.classList.add('on');
+    setTimeout(() => msg.classList.remove('on'), 4000);
+  }).catch(() => {
+    const area = document.createElement('textarea');
+    area.value = code;
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand('copy');
+    document.body.removeChild(area);
+    alert('Copied to clipboard!');
+  });
+}
+
+function resetDefaults() {
+  if (!confirm('Reset all fields to default S&W Tech values?')) return;
+  location.reload();
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+buildSlideUI();
+livePreview();
+</script>
+</body>
+</html>
