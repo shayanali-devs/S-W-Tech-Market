@@ -307,6 +307,130 @@ footer{background:rgba(3,7,14,1);border-top:1px solid var(--border);padding:5rem
 .toast{position:fixed;bottom:2.5rem;left:50%;transform:translateX(-50%) translateY(16px);background:var(--surface);border:1px solid var(--primary);border-left:3px solid var(--primary-l);color:var(--text);padding:.9rem 1.8rem;font-size:.8rem;z-index:9000;opacity:0;transition:all .38s;pointer-events:none;white-space:nowrap;}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
 
+/* ══════════════════════════════════════════════════
+   10 PREMIUM EFFECT SECTIONS — CSS
+══════════════════════════════════════════════════ */
+
+/* SHARED FX SECTION BASE */
+.fx-section{position:relative;height:480px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.fx-overlay{position:absolute;inset:0;z-index:1;}
+.fx-content{position:relative;z-index:2;text-align:center;max-width:720px;padding:0 2rem;}
+.fx-content h2{font-size:clamp(2rem,5vw,4rem);font-weight:700;letter-spacing:-.02em;line-height:1.05;margin-bottom:1rem;}
+.grad-text{background:linear-gradient(135deg,var(--primary-l),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.fx-chip{display:inline-flex;align-items:center;gap:.5rem;background:rgba(37,99,235,.12);border:1px solid rgba(37,99,235,.28);padding:.3rem .9rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--primary-l);margin-bottom:1.4rem;font-weight:600;}
+
+/* EFFECT 1: MATRIX CANVAS */
+#fxMatrix{height:500px;background:var(--dark);}
+#matrixCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:.35;}
+
+/* EFFECT 2: GRADIENT MESH ORBS */
+#fxMesh{height:480px;background:var(--dark);}
+.mesh-bg{position:absolute;inset:0;background:var(--dark);}
+.mesh-orb{position:absolute;border-radius:50%;filter:blur(80px);animation:orbFloat 8s ease-in-out infinite;}
+.orb1{width:400px;height:400px;background:rgba(37,99,235,.25);top:-100px;left:-100px;animation-delay:0s;}
+.orb2{width:350px;height:350px;background:rgba(6,182,212,.2);bottom:-80px;right:-80px;animation-delay:-2s;}
+.orb3{width:300px;height:300px;background:rgba(124,58,237,.18);top:50%;left:50%;transform:translate(-50%,-50%);animation-delay:-4s;}
+.orb4{width:250px;height:250px;background:rgba(16,185,129,.12);top:20%;right:20%;animation-delay:-6s;}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1);}25%{transform:translate(30px,-20px) scale(1.05);}50%{transform:translate(-20px,30px) scale(.95);}75%{transform:translate(20px,20px) scale(1.03);}}
+.orb1{animation-name:orbFloat;}
+.orb2{animation-name:orbFloat2;}
+.orb3{animation-name:orbFloat3;}
+@keyframes orbFloat2{0%,100%{transform:translate(0,0);}33%{transform:translate(-40px,20px);}66%{transform:translate(30px,-30px);}}
+@keyframes orbFloat3{0%,100%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.2);}}
+.fx-stats-row{display:flex;gap:2.5rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;}
+.fx-stat{text-align:center;}
+.fx-stat-v{font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--cyan);}
+.fx-stat-l{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:.25rem;}
+
+/* EFFECT 3: GLITCH TEXT */
+.glitch-sec{height:420px;background:var(--dark);}
+.glitch-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(37,99,235,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.06) 1px,transparent 1px);background-size:30px 30px;}
+.glitch-wrapper{position:relative;margin-bottom:1rem;}
+.glitch-title{font-family:'Space Mono',monospace;font-size:clamp(2.5rem,8vw,6rem);font-weight:700;color:var(--text);position:relative;display:inline-block;letter-spacing:.05em;}
+.glitch-title::before,.glitch-title::after{content:attr(data-text);position:absolute;inset:0;font-family:'Space Mono',monospace;font-size:inherit;font-weight:inherit;}
+.glitch-title::before{color:var(--cyan);animation:glitchTop 3s infinite;clip-path:polygon(0 0,100% 0,100% 40%,0 40%);}
+.glitch-title::after{color:var(--primary-l);animation:glitchBot 3s infinite;clip-path:polygon(0 60%,100% 60%,100% 100%,0 100%);}
+@keyframes glitchTop{0%,90%,100%{transform:translate(0);}91%{transform:translate(-3px,-1px);}93%{transform:translate(3px,1px);}95%{transform:translate(-2px,0);}97%{transform:translate(2px,0);}}
+@keyframes glitchBot{0%,90%,100%{transform:translate(0);}91%{transform:translate(3px,1px);}93%{transform:translate(-3px,-1px);}95%{transform:translate(2px,0);}97%{transform:translate(-2px,0);}}
+
+/* EFFECT 4: TRON NEON GRID */
+.tron-sec{height:460px;background:#020810;}
+#tronCanvas{position:absolute;inset:0;width:100%;height:100%;}
+.trust-badges{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;justify-content:center;}
+.tbadge{display:flex;align-items:center;gap:.6rem;background:rgba(37,99,235,.08);border:1px solid rgba(37,99,235,.2);padding:.6rem 1.2rem;font-size:.78rem;font-weight:500;transition:all .3s;}
+.tbadge:hover{border-color:var(--cyan);background:rgba(6,182,212,.08);transform:translateY(-2px);}
+.tbadge-ico{font-size:1.1rem;}
+
+/* EFFECT 5: ANIMATED COUNTER STRIP */
+.counter-strip{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface-alt);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1;}
+.counter-strip::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(37,99,235,.04),transparent);animation:cstripSheen 3s linear infinite;}
+@keyframes cstripSheen{0%{opacity:0;transform:translateX(-100%);}50%{opacity:1;}100%{opacity:0;transform:translateX(100%);}}
+.cs-item{padding:2rem 1rem;text-align:center;border-right:1px solid var(--border);position:relative;overflow:hidden;}
+.cs-item:last-child{border-right:none;}
+.cs-item::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:linear-gradient(90deg,var(--primary),var(--cyan));transition:width .5s;}
+.cs-item:hover::after{width:80%;}
+.cs-val{font-family:'Space Mono',monospace;font-size:2.2rem;font-weight:700;background:linear-gradient(135deg,var(--primary-l),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.cs-lbl{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:.4rem;font-weight:600;}
+
+/* EFFECT 6: HOLOGRAPHIC CARDS */
+.holo-sec{height:480px;background:var(--dark);}
+.holo-bg{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(37,99,235,.08) 0%,transparent 70%);}
+.holo-cards{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;margin-top:1.2rem;}
+.holo-card{background:rgba(255,255,255,.03);border:1px solid rgba(37,99,235,.2);padding:2rem 1.8rem;width:180px;text-align:center;transition:all .4s;position:relative;overflow:hidden;cursor:pointer;}
+.holo-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(37,99,235,.0),rgba(6,182,212,.1),rgba(124,58,237,.08));opacity:0;transition:opacity .3s;}
+.holo-card:hover::before{opacity:1;}
+.holo-card:hover{transform:translateY(-8px) scale(1.03);border-color:var(--cyan);box-shadow:0 20px 50px rgba(37,99,235,.25);}
+.holo-card.featured{border-color:var(--primary-l);background:rgba(37,99,235,.06);transform:scale(1.05);}
+.holo-card.featured:hover{transform:translateY(-10px) scale(1.08);}
+.hc-ico{font-size:2.2rem;margin-bottom:.8rem;}
+.hc-title{font-size:.85rem;font-weight:700;color:var(--text);margin-bottom:.4rem;font-family:'Space Mono',monospace;}
+.hc-desc{font-size:.72rem;color:var(--muted);line-height:1.5;}
+.holo-card::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(transparent 0deg,rgba(6,182,212,.06) 60deg,transparent 120deg);animation:holoSpin 4s linear infinite;opacity:0;transition:opacity .3s;}
+.holo-card:hover::after{opacity:1;}
+@keyframes holoSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+
+/* EFFECT 7: ANIMATED SVG WAVE DIVIDER */
+.wave-divider{position:relative;z-index:1;height:80px;background:var(--dark);overflow:hidden;line-height:0;}
+.wave-divider svg{position:absolute;bottom:0;width:100%;height:100%;}
+
+/* EFFECT 8: FLOATING TECH ICONS */
+.float-icons-sec{height:460px;background:var(--dark);}
+.float-icons-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(37,99,235,.08),transparent 60%);}
+.floating-icons{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.fi{position:absolute;font-size:1.8rem;opacity:0;animation:fiFloat linear infinite;}
+@keyframes fiFloat{0%{transform:translateY(120%) rotate(0deg);opacity:0;}10%{opacity:.5;}80%{opacity:.3;}100%{transform:translateY(-20%) rotate(360deg);opacity:0;}}
+
+/* EFFECT 9: TYPEWRITER SECTION */
+.typewriter-sec{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4rem 5rem;position:relative;z-index:1;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.tw-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(37,99,235,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.04) 1px,transparent 1px);background-size:40px 40px;}
+.typewriter-inner{position:relative;z-index:2;text-align:center;max-width:800px;}
+.typewriter-text{font-family:'Space Mono',monospace;font-size:clamp(1.3rem,3.5vw,2.5rem);font-weight:700;color:var(--text);line-height:1.4;min-height:3.5em;display:flex;align-items:center;justify-content:center;}
+.typewriter-cursor{display:inline-block;width:3px;height:1.2em;background:var(--cyan);margin-left:4px;animation:cursorBlink .8s infinite;vertical-align:middle;flex-shrink:0;}
+@keyframes cursorBlink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* EFFECT 10: INTERACTIVE SPOTLIGHT */
+.spotlight-sec{height:440px;background:var(--dark);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.spotlight-beam{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.12) 0%,rgba(6,182,212,.06) 30%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);transition:left .15s,top .15s;z-index:1;}
+.spotlight-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(37,99,235,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.05) 1px,transparent 1px);background-size:60px 60px;z-index:0;}
+.spotlight-grid::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,rgba(5,10,20,.8) 100%);}
+
+/* MOBILE RESPONSIVE */
+@media(max-width:768px){
+  .fx-section{height:auto;min-height:380px;padding:3rem 1.2rem;}
+  .counter-strip{grid-template-columns:repeat(2,1fr);}
+  .cs-item:nth-child(2){border-right:none;}
+  .cs-item:nth-child(3),.cs-item:nth-child(4){border-top:1px solid var(--border);}
+  .holo-cards{flex-direction:row;}
+  .holo-card{width:140px;padding:1.3rem 1rem;}
+  .glitch-title{font-size:clamp(2rem,10vw,4rem);}
+  .trust-badges{gap:.6rem;}
+  .tbadge{padding:.5rem .9rem;font-size:.72rem;}
+  .typewriter-sec{padding:3rem 1.2rem;}
+  .typewriter-text{font-size:clamp(1rem,4vw,1.6rem);}
+  .fx-stats-row{gap:1.5rem;}
+  .wave-divider{height:50px;}
+}
+
 /* ── REVEAL ── */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .75s,transform .75s;}
 .reveal.on{opacity:1;transform:translateY(0);}
@@ -322,10 +446,10 @@ footer{background:rgba(3,7,14,1);border-top:1px solid var(--border);padding:5rem
 ══════════════════════════════════════════════════════ */
 
 /* 1. SCROLL PROGRESS BAR */
-.scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--primary),var(--cyan));z-index:9999;width:0%;transition:width .1s linear;box-shadow:0 0 8px var(--primary);}
+.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--cyan),var(--primary));background-size:200% 100%;animation:gradShift 2s linear infinite;z-index:9999;width:0%;transition:width .08s linear;box-shadow:0 0 12px var(--primary),0 0 25px rgba(37,99,235,.4);}
 
 /* 2. CURSOR SPOTLIGHT */
-.cursor-glow{position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.06) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .3s;}
+.cursor-glow{position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.12) 0%,rgba(6,182,212,.06) 40%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:left .1s,top .1s,opacity .3s;mix-blend-mode:screen;}
 
 /* 3. PARTICLES */
 .particle{position:absolute;border-radius:50%;pointer-events:none;animation:particleFloat linear infinite;opacity:0;}
@@ -346,7 +470,7 @@ nav.stuck{backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur
 .btn-p{position:relative;overflow:hidden;}
 .btn-p::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);opacity:0;transition:opacity .3s;}
 .btn-p:hover::before{opacity:1;}
-.btn-p:hover{box-shadow:0 0 25px var(--primary),0 0 50px rgba(37,99,235,.3),inset 0 0 20px rgba(255,255,255,.05);}
+.btn-p:hover{box-shadow:0 0 20px var(--primary),0 0 40px rgba(37,99,235,.4),0 0 80px rgba(37,99,235,.2),inset 0 0 20px rgba(255,255,255,.08);}
 .btn-p:active{transform:scale(.97);}
 
 /* 8. MAGNETIC BUTTON EFFECT - handled in JS */
@@ -370,7 +494,7 @@ nav.stuck{backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur
 
 /* 13. LOGO MARK ANIMATION */
 .logo-mark{transition:all .3s;}
-.logo:hover .logo-mark{box-shadow:0 0 20px rgba(37,99,235,.5),0 0 40px rgba(6,182,212,.2);transform:rotate(-5deg) scale(1.08);}
+.logo:hover .logo-mark{box-shadow:0 0 25px rgba(37,99,235,.7),0 0 50px rgba(6,182,212,.4);transform:rotate(-8deg) scale(1.12);}
 
 /* 14. GRADIENT TEXT ANIMATION */
 .slide-title .t2{background-size:200% auto;animation:gradShift 4s linear infinite;}
@@ -469,7 +593,7 @@ nav.stuck{backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur
 
 /* 37. WHY CARD LEFT BORDER ACCENT */
 .why-card{border-left:2px solid transparent;transition:all .3s;}
-.why-card:hover{border-left-color:var(--primary);padding-left:1.8rem;}
+.why-card:hover{border-left-color:var(--cyan);padding-left:1.9rem;background:rgba(37,99,235,.03);}
 
 /* 38. MARQUEE GRADIENT FADE EDGES */
 .mq-wrap::before,.mq-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
@@ -478,9 +602,9 @@ nav.stuck{backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur
 .mq-wrap{position:relative;}
 
 /* 39. BACK TO TOP BUTTON */
-.btt{position:fixed;bottom:5.5rem;right:2rem;width:40px;height:40px;background:rgba(37,99,235,.15);border:1px solid var(--border);color:var(--primary-l);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;opacity:0;transform:translateY(10px);transition:all .3s;z-index:800;clip-path:polygon(50% 0%,100% 100%,0% 100%);}
+.btt{position:fixed;bottom:5.5rem;right:2rem;width:44px;height:44px;background:linear-gradient(135deg,var(--primary),var(--cyan));border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;opacity:0;transform:translateY(16px);transition:all .4s cubic-bezier(.175,.885,.32,1.275);z-index:800;border-radius:0;clip-path:polygon(50% 0%,100% 100%,0% 100%);box-shadow:0 4px 20px rgba(37,99,235,.4);}
 .btt.on{opacity:1;transform:translateY(0);}
-.btt:hover{background:var(--primary);color:#fff;}
+.btt:hover{transform:translateY(-3px) scale(1.1);box-shadow:0 8px 30px rgba(37,99,235,.6);}
 
 /* 40. NEWSLETTER INPUT GLOW */
 .nl-input:focus{box-shadow:0 0 0 3px rgba(37,99,235,.15),0 0 20px rgba(37,99,235,.08);}
@@ -490,13 +614,14 @@ nav.stuck{backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur
 .cat-card:hover .cat-cnt{color:var(--cyan);}
 
 /* 42. SCROLL INDICATOR DOTS */
-.scroll-dots{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.5rem;z-index:100;}
-.scroll-dot-item{width:6px;height:6px;border-radius:50%;background:rgba(232,240,255,.15);cursor:pointer;transition:all .3s;}
-.scroll-dot-item.on{background:var(--primary-l);box-shadow:0 0 8px var(--primary);height:18px;border-radius:3px;}
+.scroll-dots{position:fixed;right:1.2rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.6rem;z-index:100;}
+.scroll-dot-item{width:7px;height:7px;border-radius:50%;background:rgba(232,240,255,.2);border:1px solid rgba(37,99,235,.25);cursor:pointer;transition:all .35s cubic-bezier(.175,.885,.32,1.275);}
+.scroll-dot-item:hover{background:rgba(37,99,235,.4);transform:scale(1.3);}
+.scroll-dot-item.on{background:var(--primary-l);box-shadow:0 0 12px var(--primary),0 0 25px rgba(37,99,235,.3);height:22px;border-radius:4px;border-color:var(--primary-l);}
 
 /* 43. PRODUCT CARD SHINE SWEEP */
-.pcard::after{content:'';position:absolute;top:-50%;left:-60%;width:30%;height:200%;background:linear-gradient(to right,transparent,rgba(255,255,255,.04),transparent);transform:skewX(-15deg);transition:left .6s ease;pointer-events:none;}
-.pcard:hover::after{left:130%;}
+.pcard::after{content:'';position:absolute;top:-50%;left:-60%;width:35%;height:200%;background:linear-gradient(to right,transparent,rgba(255,255,255,.09),rgba(255,255,255,.04),transparent);transform:skewX(-15deg);transition:left .7s ease;pointer-events:none;z-index:4;}
+.pcard:hover::after{left:140%;}
 
 /* 44. SLIDE COUNTER LINE ANIMATED */
 .scnt.on{transition:background .3s,box-shadow .3s;}
@@ -507,7 +632,7 @@ footer{position:relative;}
 
 /* 46. FLOAT CART PULSE */
 .float-cart.on{animation:floatPulse 3s ease-in-out infinite;}
-@keyframes floatPulse{0%,100%{box-shadow:0 6px 28px rgba(37,99,235,.3);}50%{box-shadow:0 6px 28px rgba(37,99,235,.6),0 0 0 8px rgba(37,99,235,.08);}}
+@keyframes floatPulse{0%,100%{box-shadow:0 6px 28px rgba(37,99,235,.4);}50%{box-shadow:0 6px 35px rgba(37,99,235,.8),0 0 0 12px rgba(37,99,235,.1),0 0 0 20px rgba(37,99,235,.04);}}
 
 /* 47. SEARCH BAR RESULTS INDICATOR */
 .nav-search.has-results{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(6,182,212,.15);}
@@ -741,15 +866,37 @@ footer{position:relative;}
 </section>
 
 <!-- PARALLAX 1 -->
-<div class="parallax-sec" id="parallax1">
-  <div class="parallax-bg" id="pBg1"></div>
-  <div class="parallax-overlay"></div>
-  <div class="parallax-content reveal">
-    <h2>Genuine Products.<br><span>Real Warranty.</span></h2>
-    <p>Every product at S&W Tech Market comes with an official manufacturer warranty. We never compromise on authenticity.</p>
-    <div style="margin-top:1.8rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+<!-- ═══ EFFECT 1: MATRIX RAIN CANVAS ═══ -->
+<div class="fx-section" id="fxMatrix">
+  <canvas id="matrixCanvas"></canvas>
+  <div class="fx-overlay" style="background:linear-gradient(135deg,rgba(5,10,20,.92),rgba(5,10,20,.75));"></div>
+  <div class="fx-content reveal">
+    <div class="fx-chip">⚡ Genuine Products</div>
+    <h2>100% Authentic.<br><span class="grad-text">Real Warranty.</span></h2>
+    <p>Every product at S&W Tech Market comes with an official manufacturer warranty. We never compromise on authenticity — guaranteed.</p>
+    <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
       <a href="#products" class="btn-p">Shop Now ⚡</a>
       <a href="#why-us" class="btn-s">Learn More →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EFFECT 2: ANIMATED GRADIENT MESH ═══ -->
+<div class="fx-section" id="fxMesh">
+  <div class="mesh-bg"></div>
+  <div class="mesh-orb orb1"></div>
+  <div class="mesh-orb orb2"></div>
+  <div class="mesh-orb orb3"></div>
+  <div class="mesh-orb orb4"></div>
+  <div class="fx-overlay" style="background:rgba(5,10,20,.55);"></div>
+  <div class="fx-content reveal">
+    <div class="fx-chip">🚀 Lightning Fast</div>
+    <h2>Same Day<br><span class="grad-text">Delivery in Lahore</span></h2>
+    <p>Order before 4PM and receive your tech the same evening. Lightning-fast delivery powered by our dedicated rider network across Pakistan.</p>
+    <div class="fx-stats-row">
+      <div class="fx-stat"><div class="fx-stat-v">4PM</div><div class="fx-stat-l">Order Cutoff</div></div>
+      <div class="fx-stat"><div class="fx-stat-v">Same Day</div><div class="fx-stat-l">Lahore</div></div>
+      <div class="fx-stat"><div class="fx-stat-v">Next Day</div><div class="fx-stat-l">Pakistan</div></div>
     </div>
   </div>
 </div>
@@ -783,14 +930,7 @@ footer{position:relative;}
 </section>
 
 <!-- PARALLAX 2 -->
-<div class="parallax-sec" id="parallax2">
-  <div class="parallax-bg" id="pBg2"></div>
-  <div class="parallax-overlay"></div>
-  <div class="parallax-content reveal">
-    <h2>Same Day<br><span>Delivery in Lahore</span></h2>
-    <p>Order before 4PM and receive your tech the same evening. Lightning-fast delivery across all of Pakistan.</p>
-  </div>
-</div>
+
 
 <!-- WHY US -->
 <section id="why-us" style="background:var(--surface);border-top:1px solid var(--border);">
@@ -806,6 +946,39 @@ footer{position:relative;}
     <div class="why-card"><div class="why-ico">🔄</div><div><div class="why-title">Easy Returns</div><div class="why-desc">Not satisfied? Return within 7 days, no questions asked. We make the process hassle-free and handle everything for you.</div></div></div>
   </div>
 </section>
+
+<!-- ═══ EFFECT 3: GLITCH TEXT SECTION ═══ -->
+<div class="fx-section glitch-sec" id="fxGlitch">
+  <div class="glitch-grid-bg"></div>
+  <div class="fx-overlay" style="background:rgba(5,10,20,.82);"></div>
+  <div class="fx-content reveal" style="text-align:center;">
+    <div class="glitch-wrapper">
+      <div class="glitch-title" data-text="BEST PRICES">BEST PRICES</div>
+    </div>
+    <p style="color:rgba(232,240,255,.6);font-size:.9rem;margin-top:.8rem;max-width:480px;margin-left:auto;margin-right:auto;">We guarantee the lowest prices in Pakistan. If you find it cheaper, we beat it. No fine print.</p>
+    <div style="margin-top:1.5rem;display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;">
+      <div style="text-align:center;"><div style="font-family:Space Mono,monospace;font-size:2rem;font-weight:700;color:var(--cyan);">50%</div><div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);">Max Discount</div></div>
+      <div style="text-align:center;"><div style="font-family:Space Mono,monospace;font-size:2rem;font-weight:700;color:var(--primary-l);">0%</div><div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);">Compromise</div></div>
+      <div style="text-align:center;"><div style="font-family:Space Mono,monospace;font-size:2rem;font-weight:700;color:var(--cyan);">100%</div><div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);">Genuine</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EFFECT 4: NEON GRID / TRON SECTION ═══ -->
+<div class="fx-section tron-sec" id="fxTron">
+  <canvas id="tronCanvas"></canvas>
+  <div class="fx-overlay" style="background:rgba(5,10,20,.78);"></div>
+  <div class="fx-content reveal">
+    <div class="fx-chip">🛡 Secure Shopping</div>
+    <h2>Shop With<br><span class="grad-text">Confidence</span></h2>
+    <div class="trust-badges">
+      <div class="tbadge"><span class="tbadge-ico">🔒</span><span>Secure Checkout</span></div>
+      <div class="tbadge"><span class="tbadge-ico">📦</span><span>Tracked Delivery</span></div>
+      <div class="tbadge"><span class="tbadge-ico">↩️</span><span>7-Day Returns</span></div>
+      <div class="tbadge"><span class="tbadge-ico">✅</span><span>Verified Products</span></div>
+    </div>
+  </div>
+</div>
 
 <!-- BRANDS -->
 <div class="brands-sec" style="overflow:hidden;padding:.8rem 0;">
@@ -833,6 +1006,75 @@ footer{position:relative;}
     <div class="tcard reveal"><div class="tstars">★★★★★</div><div class="tquote">"WhatsApp ordering is so convenient. Sent them the order, got confirmation within minutes, and tracking was perfect throughout."</div><div class="tname">Bilal Ahmed</div><div class="trole">Tech Enthusiast · Islamabad</div></div>
   </div>
 </section>
+
+<!-- ═══ EFFECT 5: ANIMATED COUNTER STRIP ═══ -->
+<div class="counter-strip">
+  <div class="cs-item"><div class="cs-val" data-target="10000">0</div><div class="cs-lbl">Happy Customers</div></div>
+  <div class="cs-item"><div class="cs-val" data-target="500">0</div><div class="cs-lbl">Products Available</div></div>
+  <div class="cs-item"><div class="cs-val" data-target="99">0</div><div class="cs-lbl">% Satisfaction Rate</div></div>
+  <div class="cs-item"><div class="cs-val" data-target="3">0</div><div class="cs-lbl">Cities Served Same Day</div></div>
+</div>
+
+<!-- ═══ EFFECT 6: HOLOGRAPHIC CARD STRIP ═══ -->
+<div class="fx-section holo-sec" id="fxHolo">
+  <div class="holo-bg"></div>
+  <div class="fx-overlay" style="background:rgba(5,10,20,.7);"></div>
+  <div class="fx-content reveal" style="text-align:center;max-width:860px;">
+    <div class="fx-chip">💎 Premium Experience</div>
+    <h2 style="margin-bottom:1.5rem;">Why Thousands<br><span class="grad-text">Choose S&W</span></h2>
+    <div class="holo-cards">
+      <div class="holo-card"><div class="hc-ico">⚡</div><div class="hc-title">Speed</div><div class="hc-desc">Fastest delivery in Pakistan</div></div>
+      <div class="holo-card featured"><div class="hc-ico">🏆</div><div class="hc-title">Quality</div><div class="hc-desc">Premium products only</div></div>
+      <div class="holo-card"><div class="hc-ico">💰</div><div class="hc-title">Value</div><div class="hc-desc">Unbeatable prices</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EFFECT 7: ANIMATED WAVE DIVIDER ═══ -->
+<div class="wave-divider" id="fxWave">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path id="wavePath1" fill="rgba(37,99,235,.06)"></path>
+    <path id="wavePath2" fill="rgba(6,182,212,.04)"></path>
+    <path id="wavePath3" fill="rgba(37,99,235,.03)"></path>
+  </svg>
+</div>
+
+<!-- ═══ EFFECT 8: FLOATING TECH ICONS ═══ -->
+<div class="fx-section float-icons-sec" id="fxFloat">
+  <div class="float-icons-bg"></div>
+  <div class="floating-icons" id="floatingIcons"></div>
+  <div class="fx-overlay" style="background:rgba(5,10,20,.8);"></div>
+  <div class="fx-content reveal" style="text-align:center;">
+    <div class="fx-chip">🤝 Join Our Community</div>
+    <h2>10,000+<br><span class="grad-text">Tech Enthusiasts</span></h2>
+    <p style="color:rgba(232,240,255,.65);font-size:.9rem;margin-top:1rem;max-width:480px;margin:1rem auto 0;">From students to professionals — everyone finds their perfect tech at S&W. Join our growing community of satisfied customers.</p>
+    <div style="margin-top:1.8rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="#products" class="btn-p">Shop Now ⚡</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EFFECT 9: TYPEWRITER QUOTE SECTION ═══ -->
+<div class="typewriter-sec" id="fxType">
+  <div class="tw-bg-grid"></div>
+  <div class="typewriter-inner reveal">
+    <div style="font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--primary-l);margin-bottom:1rem;font-weight:700;">// Our Promise</div>
+    <div class="typewriter-text" id="typewriterEl"></div>
+    <div class="typewriter-cursor"></div>
+  </div>
+</div>
+
+<!-- ═══ EFFECT 10: INTERACTIVE SPOTLIGHT SECTION ═══ -->
+<div class="spotlight-sec" id="fxSpotlight">
+  <div class="spotlight-beam" id="spotlightBeam"></div>
+  <div class="spotlight-grid"></div>
+  <div class="fx-content reveal" style="text-align:center;position:relative;z-index:2;">
+    <div class="fx-chip">📞 Get In Touch</div>
+    <h2 style="margin-bottom:1rem;">Ready To<br><span class="grad-text">Order?</span></h2>
+    <p style="color:rgba(232,240,255,.6);margin-bottom:2rem;font-size:.9rem;">Chat with us on WhatsApp and get your order placed in under 2 minutes.</p>
+    <a href="#" id="waContactBtn" class="btn-p" style="font-size:.8rem;padding:1rem 2.5rem;">📲 WhatsApp Us Now</a>
+  </div>
+</div>
 
 <!-- NEWSLETTER -->
 <section class="newsletter-sec">
@@ -1509,28 +1751,67 @@ function updateProgress() {
 
 // #2 — CURSOR SPOTLIGHT GLOW
 const cursorGlow = $('cursorGlow');
+// Add custom cursor dot
+const cursorDot = document.createElement('div');
+cursorDot.style.cssText='position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s,opacity .3s;mix-blend-mode:screen;';
+document.body.appendChild(cursorDot);
+const cursorRing = document.createElement('div');
+cursorRing.style.cssText='position:fixed;width:32px;height:32px;border:1px solid rgba(37,99,235,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:left .12s,top .12s,opacity .3s,width .3s,height .3s;';
+document.body.appendChild(cursorRing);
 let cursorVisible = false;
+let mx=0,my=0;
 document.addEventListener('mousemove', e => {
-  cursorGlow.style.left = e.clientX + 'px';
-  cursorGlow.style.top  = e.clientY + 'px';
-  if (!cursorVisible) { cursorGlow.style.opacity = '1'; cursorVisible = true; }
+  mx=e.clientX; my=e.clientY;
+  cursorDot.style.left=mx+'px'; cursorDot.style.top=my+'px';
+  cursorGlow.style.left=mx+'px'; cursorGlow.style.top=my+'px';
+  cursorRing.style.left=mx+'px'; cursorRing.style.top=my+'px';
+  if (!cursorVisible) {
+    cursorGlow.style.opacity='1';
+    cursorDot.style.opacity='1';
+    cursorRing.style.opacity='1';
+    cursorVisible=true;
+  }
 });
-document.addEventListener('mouseleave', () => { cursorGlow.style.opacity = '0'; cursorVisible = false; });
+document.querySelectorAll('a,button,.pcard,.cat-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cursorRing.style.width='48px';cursorRing.style.height='48px';
+    cursorRing.style.borderColor='rgba(6,182,212,.7)';
+    cursorDot.style.transform='translate(-50%,-50%) scale(1.5)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cursorRing.style.width='32px';cursorRing.style.height='32px';
+    cursorRing.style.borderColor='rgba(37,99,235,.5)';
+    cursorDot.style.transform='translate(-50%,-50%) scale(1)';
+  });
+});
+document.addEventListener('mouseleave', () => {
+  cursorGlow.style.opacity='0';
+  cursorDot.style.opacity='0';
+  cursorRing.style.opacity='0';
+  cursorVisible=false;
+});
 
 // #3 — FLOATING PARTICLES in hero
 function spawnParticles() {
   const hero = $('heroSlider');
   if (!hero) return;
-  for (let i = 0; i < 18; i++) {
+  const colors = [
+    'rgba(37,99,235,.7)','rgba(6,182,212,.7)',
+    'rgba(59,130,246,.6)','rgba(255,255,255,.3)',
+    'rgba(124,58,237,.6)','rgba(16,185,129,.5)'
+  ];
+  for (let i = 0; i < 35; i++) {
     const p = document.createElement('div');
     p.className = 'particle';
-    const size = Math.random() * 4 + 2;
+    const size = Math.random() * 5 + 2;
+    const color = colors[Math.floor(Math.random()*colors.length)];
     p.style.cssText = `
       width:${size}px;height:${size}px;
       left:${Math.random()*100}%;
-      background:${Math.random()>.5?'rgba(37,99,235,.4)':'rgba(6,182,212,.3)'};
-      animation-duration:${Math.random()*12+8}s;
-      animation-delay:${Math.random()*8}s;
+      background:${color};
+      box-shadow:0 0 ${size*3}px ${color};
+      animation-duration:${Math.random()*15+8}s;
+      animation-delay:-${Math.random()*10}s;
     `;
     hero.appendChild(p);
   }
@@ -1543,10 +1824,12 @@ function addTilt(el) {
     const rect = el.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width  - .5;
     const y = (e.clientY - rect.top)  / rect.height - .5;
-    el.style.transform = `perspective(800px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-6px) scale(1.02)`;
+    el.style.transform = `perspective(600px) rotateY(${x*14}deg) rotateX(${-y*14}deg) translateY(-8px) scale(1.03)`;
+    el.style.boxShadow = `${-x*20}px ${-y*20}px 40px rgba(37,99,235,.25)`;
   });
   el.addEventListener('mouseleave', () => {
     el.style.transform = '';
+    el.style.boxShadow = '';
   });
 }
 // Apply tilt to new cards whenever grid updates
@@ -1563,9 +1846,9 @@ if (pg) tiltObs.observe(pg, { childList: true });
 document.querySelectorAll('.btn-p, .btn-s').forEach(btn => {
   btn.addEventListener('mousemove', e => {
     const rect = btn.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width/2)  * .25;
-    const y = (e.clientY - rect.top  - rect.height/2) * .25;
-    btn.style.transform = `translate(${x}px,${y}px) translateY(-2px)`;
+    const x = (e.clientX - rect.left - rect.width/2)  * .35;
+    const y = (e.clientY - rect.top  - rect.height/2) * .35;
+    btn.style.transform = `translate(${x}px,${y}px) translateY(-3px)`;
   });
   btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
 });
@@ -1643,7 +1926,7 @@ document.querySelectorAll('.cart-btn, .co-btn, .btn-p').forEach(btn => {
     ripple.style.cssText = `
       position:absolute;width:${size}px;height:${size}px;
       left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px;
-      background:rgba(255,255,255,.2);border-radius:50%;
+      background:rgba(255,255,255,.35);border-radius:50%;
       transform:scale(0);animation:ripple .5s linear;pointer-events:none;
     `;
     if (getComputedStyle(this).position === 'static') this.style.position = 'relative';
@@ -1696,6 +1979,257 @@ document.addEventListener('keydown', e => {
 if (window.innerWidth < 768) {
   dotsContainer?.style && (dotsContainer.style.display = 'none');
 }
+
+// ══════════════════════════════════════════════════════════
+//  10 PREMIUM VISUAL EFFECTS — JS
+// ══════════════════════════════════════════════════════════
+
+// ── EFFECT 1: MATRIX RAIN ────────────────────────────────────
+(function initMatrix() {
+  const canvas = document.getElementById('matrixCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const chars = 'アイウエオカキクケコ0123456789ABCDEF<>{}[]'.split('');
+  const fontSize = 13;
+  let cols = Math.floor(canvas.width / fontSize);
+  let drops = Array(cols).fill(1);
+  function draw() {
+    ctx.fillStyle = 'rgba(5,10,20,.06)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    drops = Array(Math.floor(canvas.width / fontSize)).fill(0).map((_, i) => drops[i] || 1);
+    drops.forEach((y, i) => {
+      const char = chars[Math.floor(Math.random() * chars.length)];
+      const alpha = Math.random() > .92 ? 1 : .4;
+      ctx.fillStyle = Math.random() > .85 ? `rgba(6,182,212,${alpha})` : `rgba(37,99,235,${alpha})`;
+      ctx.font = fontSize + 'px Space Mono, monospace';
+      ctx.fillText(char, i * fontSize, y * fontSize);
+      if (y * fontSize > canvas.height && Math.random() > .975) drops[i] = 0;
+      drops[i]++;
+    });
+  }
+  setInterval(draw, 50);
+})();
+
+// ── EFFECT 2: MESH ORBS (CSS handles animation, just connect WhatsApp) ─
+const waContactBtn = document.getElementById('waContactBtn');
+if (waContactBtn) waContactBtn.href = 'https://wa.me/' + CFG.whatsapp;
+
+// ── EFFECT 3: GLITCH (CSS handles, pulse it on scroll into view) ────────
+const glitchObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    const title = e.target.querySelector('.glitch-title');
+    if (!title) return;
+    if (e.isIntersecting) {
+      title.style.animation = 'none';
+      setTimeout(() => title.style.animation = '', 100);
+    }
+  });
+}, { threshold: .5 });
+document.querySelectorAll('.glitch-sec').forEach(el => glitchObs.observe(el));
+
+// ── EFFECT 4: TRON NEON GRID CANVAS ─────────────────────────────────────
+(function initTron() {
+  const canvas = document.getElementById('tronCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const lines = [];
+  const COLORS = ['rgba(37,99,235,.6)','rgba(6,182,212,.5)','rgba(59,130,246,.4)'];
+
+  function spawnLine() {
+    const horiz = Math.random() > .5;
+    const color = COLORS[Math.floor(Math.random() * COLORS.length)];
+    lines.push({
+      x: horiz ? 0 : Math.floor(Math.random() * (canvas.width / 30)) * 30,
+      y: horiz ? Math.floor(Math.random() * (canvas.height / 30)) * 30 : 0,
+      len: 0, maxLen: Math.random() * 200 + 80,
+      speed: Math.random() * 3 + 2,
+      horiz, color, alpha: .8, fading: false
+    });
+  }
+
+  for (let i = 0; i < 8; i++) spawnLine();
+  setInterval(spawnLine, 400);
+
+  function drawTron() {
+    ctx.fillStyle = 'rgba(2,8,16,.15)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Grid dots
+    ctx.fillStyle = 'rgba(37,99,235,.12)';
+    for (let x = 0; x < canvas.width; x += 30) {
+      for (let y = 0; y < canvas.height; y += 30) {
+        ctx.beginPath(); ctx.arc(x, y, 1, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+
+    for (let i = lines.length - 1; i >= 0; i--) {
+      const l = lines[i];
+      if (!l.fading) l.len += l.speed; else l.alpha -= .04;
+      if (l.alpha <= 0) { lines.splice(i, 1); continue; }
+      if (l.len >= l.maxLen) l.fading = true;
+
+      ctx.strokeStyle = l.color.replace(/[\d.]+\)$/, l.alpha + ')');
+      ctx.lineWidth = 1.5;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = l.color;
+      ctx.beginPath();
+      ctx.moveTo(l.x, l.y);
+      ctx.lineTo(l.horiz ? l.x + l.len : l.x, l.horiz ? l.y : l.y + l.len);
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Bright head dot
+      ctx.fillStyle = 'rgba(255,255,255,.9)';
+      ctx.beginPath();
+      ctx.arc(l.horiz ? l.x + l.len : l.x, l.horiz ? l.y : l.y + l.len, 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(drawTron);
+  }
+  drawTron();
+})();
+
+// ── EFFECT 5: ANIMATED COUNTERS (count up on scroll into view) ───────────
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.querySelectorAll('.cs-val').forEach(el => {
+      if (el.dataset.done) return;
+      el.dataset.done = '1';
+      const target = parseInt(el.dataset.target);
+      const suffix = target >= 100 ? (target === 99 ? '%' : '+') : '+';
+      const dur = 2000;
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - p, 4);
+        el.textContent = Math.floor(ease * target).toLocaleString() + suffix;
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target.toLocaleString() + suffix;
+      }
+      requestAnimationFrame(step);
+    });
+    counterObs.unobserve(e.target);
+  });
+}, { threshold: .4 });
+const counterStrip = document.querySelector('.counter-strip');
+if (counterStrip) counterObs.observe(counterStrip);
+
+// ── EFFECT 6: HOLOGRAPHIC CARD 3D MOUSE TILT ────────────────────────────
+document.querySelectorAll('.holo-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width  - .5;
+    const y = (e.clientY - rect.top)  / rect.height - .5;
+    card.style.transform = `perspective(400px) rotateY(${x*18}deg) rotateX(${-y*18}deg) translateY(-8px) scale(1.05)`;
+    card.style.background = `linear-gradient(${135+x*30}deg,rgba(37,99,235,.08),rgba(6,182,212,.06))`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = card.classList.contains('featured') ? 'scale(1.05)' : '';
+    card.style.background = '';
+  });
+});
+
+// ── EFFECT 7: ANIMATED SVG WAVE ──────────────────────────────────────────
+(function animateWave() {
+  let t = 0;
+  function wave(amplitude, frequency, phase, offset) {
+    const w = 1440, pts = [];
+    pts.push(`M0,${80 + offset}`);
+    for (let x = 0; x <= w; x += 8) {
+      const y = offset + Math.sin((x / w) * frequency * Math.PI * 2 + phase + t) * amplitude;
+      pts.push(`L${x},${y}`);
+    }
+    pts.push(`L${w},120 L0,120 Z`);
+    return pts.join(' ');
+  }
+  const p1 = document.getElementById('wavePath1');
+  const p2 = document.getElementById('wavePath2');
+  const p3 = document.getElementById('wavePath3');
+  if (!p1) return;
+  function draw() {
+    t += .025;
+    p1.setAttribute('d', wave(18, 2, 0,     30));
+    p2.setAttribute('d', wave(14, 3, 1,     45));
+    p3.setAttribute('d', wave(10, 4, 2,     55));
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ── EFFECT 8: FLOATING TECH ICONS ────────────────────────────────────────
+(function initFloatIcons() {
+  const container = document.getElementById('floatingIcons');
+  if (!container) return;
+  const icons = ['💻','📱','🎮','🎧','⌚','🖥','📷','🔌','🖱','⌨️','📡','🎯','🔋','💡','🖨'];
+  for (let i = 0; i < 20; i++) {
+    const el = document.createElement('div');
+    el.className = 'fi';
+    el.textContent = icons[i % icons.length];
+    const size = Math.random() * 1.5 + 1;
+    el.style.cssText = `
+      font-size:${size}rem;
+      left:${Math.random() * 100}%;
+      animation-duration:${Math.random() * 12 + 10}s;
+      animation-delay:-${Math.random() * 12}s;
+      filter:grayscale(.7) opacity(.5);
+    `;
+    container.appendChild(el);
+  }
+})();
+
+// ── EFFECT 9: TYPEWRITER QUOTES ──────────────────────────────────────────
+(function initTypewriter() {
+  const el = document.getElementById('typewriterEl');
+  if (!el) return;
+  const quotes = [
+    "We don't just sell tech — we deliver experiences.",
+    "Every product. Genuine. Every time.",
+    "Your satisfaction is our only metric.",
+    "Fast delivery. Real warranty. Zero compromise.",
+    "S&W Tech — where quality meets affordability.",
+  ];
+  let qi = 0, ci = 0, deleting = false, pauseTimer = null;
+
+  function type() {
+    const q = quotes[qi];
+    if (!deleting) {
+      el.textContent = q.slice(0, ++ci);
+      if (ci === q.length) { deleting = true; clearTimeout(pauseTimer); pauseTimer = setTimeout(type, 2200); return; }
+    } else {
+      el.textContent = q.slice(0, --ci);
+      if (ci === 0) { deleting = false; qi = (qi + 1) % quotes.length; }
+    }
+    setTimeout(type, deleting ? 35 : 70);
+  }
+  setTimeout(type, 800);
+})();
+
+// ── EFFECT 10: INTERACTIVE SPOTLIGHT FOLLOW MOUSE ───────────────────────
+(function initSpotlight() {
+  const sec = document.getElementById('fxSpotlight');
+  const beam = document.getElementById('spotlightBeam');
+  if (!sec || !beam) return;
+  // Default center
+  beam.style.left = '50%';
+  beam.style.top  = '50%';
+  sec.addEventListener('mousemove', e => {
+    const rect = sec.getBoundingClientRect();
+    beam.style.left = (e.clientX - rect.left) + 'px';
+    beam.style.top  = (e.clientY - rect.top)  + 'px';
+  });
+  sec.addEventListener('mouseleave', () => {
+    beam.style.left = '50%';
+    beam.style.top  = '50%';
+  });
+})();
 </script>
 </body>
 </html>
