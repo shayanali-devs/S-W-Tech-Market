@@ -317,6 +317,212 @@ footer{background:rgba(3,7,14,1);border-top:1px solid var(--border);padding:5rem
 
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
 
+/* ══════════════════════════════════════════════════════
+   50 PREMIUM DESIGN EFFECTS — PURELY ADDITIVE
+══════════════════════════════════════════════════════ */
+
+/* 1. SCROLL PROGRESS BAR */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--primary),var(--cyan));z-index:9999;width:0%;transition:width .1s linear;box-shadow:0 0 8px var(--primary);}
+
+/* 2. CURSOR SPOTLIGHT */
+.cursor-glow{position:fixed;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.06) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:opacity .3s;}
+
+/* 3. PARTICLES */
+.particle{position:absolute;border-radius:50%;pointer-events:none;animation:particleFloat linear infinite;opacity:0;}
+@keyframes particleFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0;}10%{opacity:.6;}90%{opacity:.4;}100%{transform:translateY(-100px) rotate(720deg);opacity:0;}}
+
+/* 4. ANIMATED GRADIENT BORDER on nav (when stuck) */
+nav.stuck::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--primary),var(--cyan),transparent);animation:borderSlide 3s linear infinite;}
+@keyframes borderSlide{0%{background-position:-200% center;}100%{background-position:200% center;}}
+nav.stuck{background-size:200% 1px;}
+
+/* 5. GLASSMORPHISM NAV */
+nav.stuck{backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);}
+
+/* 6. SCANLINE OVERLAY */
+.hero::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px);pointer-events:none;z-index:3;}
+
+/* 7. NEON GLOW BUTTONS */
+.btn-p{position:relative;overflow:hidden;}
+.btn-p::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);opacity:0;transition:opacity .3s;}
+.btn-p:hover::before{opacity:1;}
+.btn-p:hover{box-shadow:0 0 25px var(--primary),0 0 50px rgba(37,99,235,.3),inset 0 0 20px rgba(255,255,255,.05);}
+.btn-p:active{transform:scale(.97);}
+
+/* 8. MAGNETIC BUTTON EFFECT - handled in JS */
+
+/* 9. CARD 3D TILT - handled in JS */
+.pcard{transform-style:preserve-3d;transition:transform .4s ease,border-color .3s,box-shadow .3s;}
+.pcard .pimg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04),transparent);opacity:0;transition:opacity .3s;z-index:2;}
+.pcard:hover .pimg::after{opacity:1;}
+
+/* 10. SHIMMER LOADING SKELETON */
+@keyframes shimmer{0%{background-position:-200% 0;}100%{background-position:200% 0;}}
+.skeleton{background:linear-gradient(90deg,var(--card) 25%,rgba(37,99,235,.08) 50%,var(--card) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;}
+
+/* 11. ANIMATED COUNTER */
+.stat-v{transition:transform .3s;}
+.stat-item:hover .stat-v{transform:scale(1.08);}
+
+/* 12. PULSE RING ON CART BADGE */
+.cart-cnt.on{animation:pulseRing 2s infinite;}
+@keyframes pulseRing{0%,100%{box-shadow:0 0 0 0 rgba(6,182,212,.6);}50%{box-shadow:0 0 0 6px rgba(6,182,212,0);}}
+
+/* 13. LOGO MARK ANIMATION */
+.logo-mark{transition:all .3s;}
+.logo:hover .logo-mark{box-shadow:0 0 20px rgba(37,99,235,.5),0 0 40px rgba(6,182,212,.2);transform:rotate(-5deg) scale(1.08);}
+
+/* 14. GRADIENT TEXT ANIMATION */
+.slide-title .t2{background-size:200% auto;animation:gradShift 4s linear infinite;}
+@keyframes gradShift{0%{background-position:0% center;}50%{background-position:100% center;}100%{background-position:0% center;}}
+
+/* 15. CATEGORY CARD CORNER ACCENT */
+.cat-card::before{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 22px 22px 0;border-color:transparent rgba(37,99,235,.2) transparent transparent;transition:border-width .3s;}
+.cat-card:hover::before{border-width:0 32px 32px 0;border-color:transparent var(--primary) transparent transparent;}
+
+/* 16. ANIMATED UNDERLINE ON NAV LINKS */
+.nav-links a{position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:linear-gradient(90deg,var(--primary),var(--cyan));transition:width .3s;}
+.nav-links a:hover::after{width:100%;}
+
+/* 17. PRODUCT PRICE GLOW */
+.pprice{transition:text-shadow .3s;}
+.pcard:hover .pprice{text-shadow:0 0 20px rgba(59,130,246,.5);}
+
+/* 18. ADD BUTTON SPIN */
+.add-btn{transition:all .25s cubic-bezier(.175,.885,.32,1.275);}
+.add-btn:hover:not(:disabled){transform:scale(1.15) rotate(90deg);box-shadow:0 0 20px var(--primary);}
+.add-btn:active{transform:scale(.9) rotate(90deg);}
+
+/* 19. CART DRAWER ITEMS SLIDE IN */
+.ci{animation:slideInRight .3s ease both;}
+@keyframes slideInRight{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+
+/* 20. TOAST SLIDE UP */
+.toast{border-radius:0;font-family:'Space Grotesk',sans-serif;}
+
+/* 21. FOOTER SOCIAL BUTTON SPIN */
+.soc-btn{transition:all .3s;}
+.soc-btn:hover{transform:translateY(-3px) scale(1.1);box-shadow:0 5px 15px rgba(37,99,235,.25);}
+
+/* 22. PARALLAX OVERLAY ANIMATION */
+.parallax-overlay{background:linear-gradient(135deg,rgba(5,10,20,.9) 0%,rgba(5,10,20,.55) 100%);animation:overlayPulse 6s ease-in-out infinite;}
+@keyframes overlayPulse{0%,100%{opacity:1;}50%{opacity:.85;}}
+
+/* 23. HERO CHIP TYPING CURSOR */
+.slide-chip::after{content:'|';animation:blink .8s infinite;margin-left:2px;color:var(--cyan);}
+
+/* 24. WHY CARD ICON BOUNCE */
+.why-ico{transition:transform .3s cubic-bezier(.175,.885,.32,1.275);}
+.why-card:hover .why-ico{transform:scale(1.15) rotate(-8deg);}
+
+/* 25. TESTIMONIAL QUOTE MARK ANIMATE */
+.tcard::before{transition:all .4s;}
+.tcard:hover::before{color:rgba(37,99,235,.18);font-size:5rem;top:.4rem;right:.8rem;}
+
+/* 26. SECTION LABEL DASH ANIMATE */
+.slbl::before{transition:width .6s;}
+.slbl:hover::before{width:40px;}
+
+/* 27. BRAND STRIP HOVER */
+.brands-track{will-change:transform;}
+.brand-item{transition:all .3s;letter-spacing:.08em;}
+.brand-item:hover{letter-spacing:.18em;color:var(--primary-l);opacity:1;}
+
+/* 28. AESTHETICS ITEM SHIMMER */
+.aes-item::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(37,99,235,.12),transparent,rgba(6,182,212,.08));opacity:0;transition:opacity .4s;z-index:1;}
+.aes-item:hover::before{opacity:1;}
+
+/* 29. STATS NUMBER COUNTER GLOW */
+.stat-v{text-shadow:0 0 30px rgba(59,130,246,.2);}
+.stat-item:hover .stat-v{text-shadow:0 0 40px rgba(59,130,246,.5);}
+
+/* 30. SCROLL REVEAL STAGGER for product cards */
+.pcard:nth-child(1){transition-delay:.05s;}
+.pcard:nth-child(2){transition-delay:.1s;}
+.pcard:nth-child(3){transition-delay:.15s;}
+.pcard:nth-child(4){transition-delay:.2s;}
+.pcard:nth-child(5){transition-delay:.25s;}
+.pcard:nth-child(6){transition-delay:.3s;}
+
+/* 31. INPUT FOCUS GLOW */
+.fg input:focus,.fg textarea:focus,.fg select:focus{box-shadow:0 0 0 3px rgba(37,99,235,.12);}
+.nav-search:focus{box-shadow:0 0 0 3px rgba(37,99,235,.12);}
+
+/* 32. CHECKOUT MODAL BORDER GLOW */
+.mbox{box-shadow:0 25px 80px rgba(0,0,0,.6),0 0 0 1px rgba(37,99,235,.12);}
+
+/* 33. CART DRAWER SHADOW */
+.cart-drawer{box-shadow:-20px 0 60px rgba(0,0,0,.5);}
+
+/* 34. TICKER LABEL PULSE */
+.ticker-lbl{animation:tickerPulse 2s ease-in-out infinite;}
+@keyframes tickerPulse{0%,100%{opacity:1;}50%{opacity:.75;}}
+
+/* 35. PRODUCT BADGE GLOW */
+.pbadge.b-new{box-shadow:0 0 10px rgba(37,99,235,.4);}
+.pbadge.b-hot{box-shadow:0 0 10px rgba(245,158,11,.4);}
+.pbadge.b-sale{box-shadow:0 0 10px rgba(239,68,68,.4);}
+
+/* 36. HERO BACKGROUND NOISE */
+.hero::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:.4;pointer-events:none;z-index:1;}
+
+/* 37. WHY CARD LEFT BORDER ACCENT */
+.why-card{border-left:2px solid transparent;transition:all .3s;}
+.why-card:hover{border-left-color:var(--primary);padding-left:1.8rem;}
+
+/* 38. MARQUEE GRADIENT FADE EDGES */
+.mq-wrap::before,.mq-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none;}
+.mq-wrap::before{left:0;background:linear-gradient(to right,var(--surface),transparent);}
+.mq-wrap::after{right:0;background:linear-gradient(to left,var(--surface),transparent);}
+.mq-wrap{position:relative;}
+
+/* 39. BACK TO TOP BUTTON */
+.btt{position:fixed;bottom:5.5rem;right:2rem;width:40px;height:40px;background:rgba(37,99,235,.15);border:1px solid var(--border);color:var(--primary-l);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;opacity:0;transform:translateY(10px);transition:all .3s;z-index:800;clip-path:polygon(50% 0%,100% 100%,0% 100%);}
+.btt.on{opacity:1;transform:translateY(0);}
+.btt:hover{background:var(--primary);color:#fff;}
+
+/* 40. NEWSLETTER INPUT GLOW */
+.nl-input:focus{box-shadow:0 0 0 3px rgba(37,99,235,.15),0 0 20px rgba(37,99,235,.08);}
+
+/* 41. CATEGORY GRID ITEM COUNT BADGE ANIMATE */
+.cat-cnt{transition:color .3s;}
+.cat-card:hover .cat-cnt{color:var(--cyan);}
+
+/* 42. SCROLL INDICATOR DOTS */
+.scroll-dots{position:fixed;right:1.5rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.5rem;z-index:100;}
+.scroll-dot-item{width:6px;height:6px;border-radius:50%;background:rgba(232,240,255,.15);cursor:pointer;transition:all .3s;}
+.scroll-dot-item.on{background:var(--primary-l);box-shadow:0 0 8px var(--primary);height:18px;border-radius:3px;}
+
+/* 43. PRODUCT CARD SHINE SWEEP */
+.pcard::after{content:'';position:absolute;top:-50%;left:-60%;width:30%;height:200%;background:linear-gradient(to right,transparent,rgba(255,255,255,.04),transparent);transform:skewX(-15deg);transition:left .6s ease;pointer-events:none;}
+.pcard:hover::after{left:130%;}
+
+/* 44. SLIDE COUNTER LINE ANIMATED */
+.scnt.on{transition:background .3s,box-shadow .3s;}
+
+/* 45. FOOTER BOTTOM GRADIENT LINE */
+footer::before{content:'';display:block;height:1px;background:linear-gradient(90deg,transparent,var(--primary),var(--cyan),transparent);margin-bottom:0;position:absolute;top:0;left:0;right:0;}
+footer{position:relative;}
+
+/* 46. FLOAT CART PULSE */
+.float-cart.on{animation:floatPulse 3s ease-in-out infinite;}
+@keyframes floatPulse{0%,100%{box-shadow:0 6px 28px rgba(37,99,235,.3);}50%{box-shadow:0 6px 28px rgba(37,99,235,.6),0 0 0 8px rgba(37,99,235,.08);}}
+
+/* 47. SEARCH BAR RESULTS INDICATOR */
+.nav-search.has-results{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(6,182,212,.15);}
+
+/* 48. HERO SLIDE EXIT BLUR */
+.slide.exit{filter:blur(2px);}
+.slide.active{filter:blur(0);transition:opacity .8s,transform .8s,filter .8s;}
+
+/* 49. STAT ITEM HOVER BACKGROUND */
+.stat-item{transition:background .3s;}
+.stat-item:hover{background:rgba(37,99,235,.05);}
+
+/* 50. SECTION DIVIDER GLOW LINE */
+.brands-sec{box-shadow:inset 0 1px 0 rgba(37,99,235,.15),inset 0 -1px 0 rgba(37,99,235,.15);}
+
 /* ── RESPONSIVE ── */
 /* ── TABLET 1200px ── */
 @media(max-width:1200px){
@@ -463,6 +669,10 @@ footer{background:rgba(3,7,14,1);border-top:1px solid var(--border);padding:5rem
 <body>
 
 <!-- THEME BANNER -->
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+<button class="btt" id="bttBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲</button>
+<div class="scroll-dots" id="scrollDots"></div>
 <div class="theme-banner" id="themeBanner"></div>
 
 <!-- TICKER -->
@@ -482,7 +692,7 @@ footer{background:rgba(3,7,14,1);border-top:1px solid var(--border);padding:5rem
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
-    <input class="nav-search" type="text" placeholder="🔍 Search products..." id="searchInput" oninput="searchProducts(this.value)">
+    <input class="nav-search" type="text" placeholder="🔍 Search products..." id="searchInput" oninput="searchProducts(this.value)" onkeydown="if(event.key==='Enter'){searchProducts(this.value);}" autocomplete="off" spellcheck="false">
     <button class="cart-btn" onclick="openCart()">🛒 Cart<span class="cart-cnt" id="cartCnt">0</span></button>
   </div>
 </nav>
@@ -989,17 +1199,68 @@ function loadAesthetics(items) {
 }
 
 // ── SEARCH ───────────────────────────────────────────────────
+let _searchTimer = null;
+
 window.searchProducts = val => {
-  if (!val) { renderProducts(_allItems, _currentCat); return; }
-  const lower = val.toLowerCase();
-  const all = Object.entries(_allItems).filter(([,i]) =>
-    i.active!==false && (i.name.toLowerCase().includes(lower)||(i.description||'').toLowerCase().includes(lower))
-  );
-  const grid = $('productsGrid');
-  if (!all.length) { grid.innerHTML = '<div style="grid-column:1/-1;padding:3rem;color:var(--muted);text-align:center;">No results found for "'+val+'"</div>'; return; }
-  grid.innerHTML = all.map(([id,item]) => productHTML(id,item)).join('');
-  revealAll();
+  clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(() => doSearch(val), 250);
 };
+
+function doSearch(val) {
+  const grid = $('productsGrid');
+  const q = (val||'').trim().toLowerCase();
+
+  // Scroll to products section
+  if (q) {
+    document.querySelector('#products').scrollIntoView({behavior:'smooth', block:'start'});
+    // Remove active tab highlight to show we're in search mode
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
+  } else {
+    // Empty search — restore current category
+    renderProducts(_allItems, _currentCat);
+    document.querySelectorAll('.tab-btn').forEach((b,i) => {
+      if (b.textContent === _currentCat) b.classList.add('on');
+    });
+    return;
+  }
+
+  if (!Object.keys(_allItems).length) {
+    grid.innerHTML = '<div style="grid-column:1/-1;padding:3rem;color:var(--muted);text-align:center;">Products are still loading...</div>';
+    return;
+  }
+
+  const results = Object.entries(_allItems).filter(([,i]) =>
+    i.active !== false && (
+      (i.name||'').toLowerCase().includes(q) ||
+      (i.description||'').toLowerCase().includes(q) ||
+      (i.category||'').toLowerCase().includes(q) ||
+      (i.badge||'').toLowerCase().includes(q)
+    )
+  );
+
+  if (!results.length) {
+    grid.innerHTML = `<div style="grid-column:1/-1;padding:3rem;text-align:center;">
+      <div style="font-size:2.5rem;margin-bottom:.8rem;">🔍</div>
+      <div style="color:var(--text);font-size:.9rem;margin-bottom:.4rem;">No results for "<strong style="color:var(--primary-l)">${val}</strong>"</div>
+      <div style="color:var(--muted);font-size:.78rem;">Try a different keyword or browse categories above</div>
+    </div>`;
+    return;
+  }
+
+  // Group results by category for better UX
+  grid.innerHTML = `<div style="grid-column:1/-1;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--primary-l);margin-bottom:.5rem;font-weight:700;">${results.length} result${results.length!==1?'s':''} for "${val}"</div>` +
+    results.map(([id,item]) => productHTML(id,item)).join('');
+  revealAll();
+}
+
+// Clear search when pressing Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.activeElement === $('searchInput')) {
+    $('searchInput').value = '';
+    doSearch('');
+    $('searchInput').blur();
+  }
+});
 
 // ── CART ─────────────────────────────────────────────────────
 let cart=[], checkoutMethod='wa', liveLocation=null;
@@ -1234,6 +1495,207 @@ function toast(msg) {
   clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('on'),3000);
 }
 window.toast=toast;
+
+// ══════════════════════════════════════════════════════
+//  50 PREMIUM JS EFFECTS
+// ══════════════════════════════════════════════════════
+
+// #1 — SCROLL PROGRESS BAR
+const progressBar = $('scrollProgress');
+function updateProgress() {
+  const docH = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (window.scrollY / docH * 100) + '%';
+}
+
+// #2 — CURSOR SPOTLIGHT GLOW
+const cursorGlow = $('cursorGlow');
+let cursorVisible = false;
+document.addEventListener('mousemove', e => {
+  cursorGlow.style.left = e.clientX + 'px';
+  cursorGlow.style.top  = e.clientY + 'px';
+  if (!cursorVisible) { cursorGlow.style.opacity = '1'; cursorVisible = true; }
+});
+document.addEventListener('mouseleave', () => { cursorGlow.style.opacity = '0'; cursorVisible = false; });
+
+// #3 — FLOATING PARTICLES in hero
+function spawnParticles() {
+  const hero = $('heroSlider');
+  if (!hero) return;
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 4 + 2;
+    p.style.cssText = `
+      width:${size}px;height:${size}px;
+      left:${Math.random()*100}%;
+      background:${Math.random()>.5?'rgba(37,99,235,.4)':'rgba(6,182,212,.3)'};
+      animation-duration:${Math.random()*12+8}s;
+      animation-delay:${Math.random()*8}s;
+    `;
+    hero.appendChild(p);
+  }
+}
+spawnParticles();
+
+// #4 — 3D CARD TILT on product cards
+function addTilt(el) {
+  el.addEventListener('mousemove', e => {
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width  - .5;
+    const y = (e.clientY - rect.top)  / rect.height - .5;
+    el.style.transform = `perspective(800px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-6px) scale(1.02)`;
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = '';
+  });
+}
+// Apply tilt to new cards whenever grid updates
+const tiltObs = new MutationObserver(() => {
+  document.querySelectorAll('.pcard:not([data-tilt])').forEach(card => {
+    card.setAttribute('data-tilt','1');
+    addTilt(card);
+  });
+});
+const pg = $('productsGrid');
+if (pg) tiltObs.observe(pg, { childList: true });
+
+// #5 — MAGNETIC BUTTONS
+document.querySelectorAll('.btn-p, .btn-s').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width/2)  * .25;
+    const y = (e.clientY - rect.top  - rect.height/2) * .25;
+    btn.style.transform = `translate(${x}px,${y}px) translateY(-2px)`;
+  });
+  btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+});
+
+// #6 — ANIMATED STAT COUNTERS
+function animateCounter(el, target, suffix='') {
+  const start = 0, duration = 1800;
+  const startTime = performance.now();
+  const isPlus = String(target).includes('+');
+  const num = parseInt(target);
+  function step(now) {
+    const p = Math.min((now - startTime) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.floor(ease * num).toLocaleString() + (isPlus ? '+' : '') + suffix;
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const statObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target.querySelector('.stat-v');
+    if (!el || el.dataset.animated) return;
+    el.dataset.animated = '1';
+    const raw = el.textContent;
+    if (raw.includes('★')) return;
+    if (raw.includes('Day')) return;
+    const num = parseInt(raw.replace(/[^0-9]/g,''));
+    if (!isNaN(num)) animateCounter(el, raw);
+  });
+}, { threshold: .5 });
+document.querySelectorAll('.stat-item').forEach(el => statObs.observe(el));
+
+// #7 — SCROLL INDICATOR DOTS (page sections)
+const sections = ['#categories','#products','#aesthetics','#why-us'];
+const dotsContainer = $('scrollDots');
+if (dotsContainer) {
+  dotsContainer.innerHTML = sections.map((s,i) =>
+    `<div class="scroll-dot-item" onclick="document.querySelector('${s}').scrollIntoView({behavior:'smooth'})" title="${s.slice(1)}"></div>`
+  ).join('');
+  const dotEls = dotsContainer.querySelectorAll('.scroll-dot-item');
+  function updateDots() {
+    sections.forEach((s, i) => {
+      const el = document.querySelector(s);
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      dotEls[i].classList.toggle('on', rect.top <= window.innerHeight/2 && rect.bottom > 0);
+    });
+  }
+  window.addEventListener('scroll', updateDots, { passive: true });
+  updateDots();
+}
+
+// #8 — BACK TO TOP BUTTON
+const bttBtn = $('bttBtn');
+function updateBtt() {
+  bttBtn?.classList.toggle('on', window.scrollY > 400);
+}
+
+// #9 — SEARCH INPUT RESULTS INDICATOR
+const searchEl = $('searchInput');
+if (searchEl) {
+  searchEl.addEventListener('input', function() {
+    this.classList.toggle('has-results', this.value.length > 0);
+    if (!this.value) this.classList.remove('has-results');
+  });
+}
+
+// #10 — CART BUTTON RIPPLE
+document.querySelectorAll('.cart-btn, .co-btn, .btn-p').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    const ripple = document.createElement('span');
+    const rect = this.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.cssText = `
+      position:absolute;width:${size}px;height:${size}px;
+      left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px;
+      background:rgba(255,255,255,.2);border-radius:50%;
+      transform:scale(0);animation:ripple .5s linear;pointer-events:none;
+    `;
+    if (getComputedStyle(this).position === 'static') this.style.position = 'relative';
+    this.style.overflow = 'hidden';
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 500);
+  });
+});
+
+// Add ripple keyframe
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = '@keyframes ripple{to{transform:scale(2.5);opacity:0;}}';
+document.head.appendChild(rippleStyle);
+
+// #11 — COMBINED SCROLL HANDLER
+window.addEventListener('scroll', () => {
+  updateProgress();
+  updateBtt();
+}, { passive: true });
+
+// #12 — HERO SLIDE SWIPE (touch support)
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+document.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) nextSlide(); else prevSlide();
+  }
+}, { passive: true });
+
+// #13 — PRODUCT IMAGE LAZY LOAD with fade
+document.querySelectorAll('.pcard img').forEach(img => {
+  img.style.opacity = '0';
+  img.addEventListener('load', function() {
+    this.style.transition = 'opacity .4s';
+    this.style.opacity = '1';
+  });
+  if (img.complete) img.style.opacity = '1';
+});
+
+// #14 — KEYBOARD SHORTCUT: / to focus search
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+    e.preventDefault();
+    $('searchInput')?.focus();
+  }
+});
+
+// #15 — SCROLL DOTS HIDE ON MOBILE
+if (window.innerWidth < 768) {
+  dotsContainer?.style && (dotsContainer.style.display = 'none');
+}
 </script>
 </body>
 </html>
